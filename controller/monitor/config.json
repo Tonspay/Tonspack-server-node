@@ -107,7 +107,11 @@
         },
         {
             "name":"tron",
-            "pair":"TRONUSDT"
+            "pair":"TRXUSDT"
+        },
+        {
+            "name":"sol",
+            "pair":"SOLUSDT"
         }
     ]
 }

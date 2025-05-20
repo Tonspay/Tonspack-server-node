@@ -45,7 +45,6 @@ const { address } = require("bitcoinjs-lib")
 
 async function binanceOracle()
 {
-    let oracels = []
     let tokens = JSON.parse(JSON.stringify(
         config.binance
     ))
@@ -54,20 +53,20 @@ async function binanceOracle()
         let price = await api.binanceTicker(tokens[i].pair);
         if(price && price?.price)
         {
-            tokens[i]['price'] = price?.price
+            tokens[i]['price'] = Number(price?.price)
         }
         
         await tool.sleep(1000)
     }
-    console.log(tokens)
-    return oracels ;
+    return tokens ;
 }
 
 
 async function oracle()
 {
     // evmOracle()
-    let price = binanceOracle()
+    let price =await  binanceOracle()
+    console.log("⏰ Oracle :: ",price)
     await redis.setStorage("binance_price_oracle",JSON.stringify(
         {
             price
